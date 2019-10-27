@@ -1,0 +1,134 @@
+{% extends 'core/sidebar.html' %}
+{% load staticfiles %}
+{% load core_filters %}
+{% block content %}
+<div id="fleets-container">
+      <table class="table dataTable no-footer">
+        <thead>
+	  <th></th>
+          <th scope="col">Countdown</th>
+          <th scope="col">Date</th>
+          <th scope="col">FC</th>
+          <th scope="col">Name</th>
+	  <th scope="col">Doctrine</th>
+          <th scope="col">Form-up</th>
+          <th scope="col">Group</th>
+          {% if user_has_event or perms.engagement.manage_events %}
+          <th scope="col">Admin Actions</th>
+          {% endif %}
+        </thead>
+        <tbody>
+          {% for event in events %}
+          {% include 'events/event_row.html' %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+</div></div>			
+			<div id="youtube" style="margin:10%;margin-top:10px;margin-bottom:0px;background-color:#62176f;height:30px;color:#cccccc;text-transform:uppercase;padding-left:10px">
+			Youtube Video's 
+			</div>
+			<script>
+				var length = 0;
+				selected = 0;
+				$( document ).ready(function() {
+					length = $(".youtube-slide").length;
+	                                $($(".youtube-slide")[selected]).css("display","inline")
+				});
+				function next()
+				{
+					$($(".youtube-slide")[selected]).css("display","none")
+					selected = selected + 1;
+					if (selected == length)
+						selected = 0;
+					$($(".youtube-slide")[selected]).css("display","inline")
+				}
+				function prev()
+				{
+	                                $($(".youtube-slide")[selected]).css("display","none")
+                                        selected = selected - 1;
+                                        if (selected == -1)
+                                                selected = 0;
+                                        $($(".youtube-slide")[selected]).css("display","inline")
+				}
+			</script>
+			<div id="youtube-text" style="margin:10%;margin-top:0px;background-color:rgb(15,15,15);padding-top:12px;padding-left:10px;padding-right:10px;color:rgb(204,204,204);padding-bottom:10px;min-height:400px;">
+				<div class="youtube-slideshow">
+				{% for link in youtube %}
+				  <div class="youtube-slide" style="display:none">
+						
+					  <iframe width="100%" height="720" src="{{link.youtube_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                          <div style="float:left"><a href="#" onclick="prev()">prev</a></div>
+					  <div style="float:right"><a href="#" onclick="next()">next</a></div>
+					  <div style="width:100%;height:20px"></div>
+
+				  </div>
+				  {% endfor %}
+				</div>
+			</div>
+
+			<div id="FCfeedback" style="margin:10%;margin-top:10px;margin-bottom:0px;background-color:#62176f;height:30px;color:#cccccc;text-transform:uppercase;padding-left:10px">
+                       	Latest FC feedback 
+                        </div>
+                        <div id="FC-text" style="margin:10%;margin-top:0px;background-color:rgb(15,15,15);padding-top:12px;padding-left:10px;padding-right:10px;color:rgb(204,204,204);padding-bottom:10px;min-height:400px;">
+			{% for item in Feedback %}
+                        <div style="float:left;margin:10px;border:1px solid #FFF;padding:10px;">
+				FC: {{item.FC}}<br>
+				Doctrine: {{item.doctrine}}<br>
+				Fleet: {{item.ratethefleet}}/10<br>
+				FC: {{item.ratethefc}}/10<br>
+				Description {{item.additional|safe}}<br>
+			</div>
+			{% endfor %}
+			</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(function () {
+    $('table').DataTable({
+      'paging'      : false,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : false,
+      'autoWidth'   : false,
+      'order' : [[ 1, 'asc' ]],
+      'columnDefs' : [
+        { 'orderable' : false, 'targets' : 0 }
+      ]
+    })
+ })
+
+setInterval(function() {
+  var countdowns = document.getElementsByClassName('countdown')
+  for(i=0; i<countdowns.length; i++) {
+    // pull date
+    var elements = countdowns[i].getElementsByTagName('*')
+    if (navigator.userAgent.search("Firefox") > -1){
+    var date = new Date(elements[0].innerText.replace(' UTC','+00:00'))
+    } else {  
+    var date = new Date(elements[0].innerText)
+    }
+    var now = new Date().getTime()
+    var distance = date - now
+    // calculate times
+    sign = Math.sign(distance)
+    distance = Math.abs(distance)
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // display result
+    elements[1].innerHTML = (sign < 0 ? "-" : "") + days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+  }
+}, 1000);
+</script>
+<script src="{% static 'global/ui/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'global/ui/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'global/ui/bower_components/moment/moment.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data.min.js"></script>
+{% endblock %}
+
+

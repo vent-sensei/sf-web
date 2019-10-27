@@ -1,0 +1,21 @@
+<tr class='event_row {% if event.is_expired %} expired {% endif %}' {% if event.is_expired %} hidden {% endif %} {% if event.Cancelled %} style='background-color:#2F0000' {% endif %}>
+  <td><img src='http://167.99.183.17/static/imgs/NPSI%20Logos/{{event.group}}.png' style='height:22px'></td> 
+  <td>
+    <div id='{{event.pk}}' class='countdown'>
+      <p class='date' hidden>{{event.start_datetime}}</p>
+      <p class='counter'></p>
+    </div>
+  </td>
+  <td data-order='{{ event.start_datetime.isoformat }}'>
+    <p>
+    <span class='datetime'>{{event.start_datetime_goodlooking}}</span>
+    </p>
+  </td>
+  <!-- test -->
+  <td><a href='/fcprofile/{{event.FC}}'>{{event.FC}}</a></td>
+  <td><span title='{{event.description}}'>{{event.name}}</span></td>
+  <td><a href='/doctrine/public/{{event.doctrine.dochash}}/'>{{event.doctrine}}</a></td>
+  <td>{{event.formup}}</td>
+  <td><a href='/group/{{event.group}}'>{{event.group}}</a></td>
+</tr>
+  
