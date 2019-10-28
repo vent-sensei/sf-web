@@ -10,8 +10,7 @@
 
 		<link rel='shortcut icon' type='image/png' href='{{SITE_LOGO}}'/>
 
-		<!-- <link rel='stylesheet' href='/staticfiles/global/css/base.css'/> -->
-		<link rel='stylesheet' href='./base.css'/>
+		<link rel='stylesheet' href='http://167.99.183.17:7554/static/global/css/base.css'/>
 
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 		<script src='https://momentjs.com/downloads/moment.min.js'></script>
@@ -34,7 +33,7 @@
 
 	<body>
 		<div class='header'>
-			<img src='./sf.png'>
+			<img src='http://167.99.183.17:7554/static/imgs/sf.png'>
 			<span>Spectre Fleet</span>
 		</div>
 		<div class='content'>
@@ -55,7 +54,7 @@
 					<tbody>
 						<tr class='fleet-row'>
 							<td class='group-cell'>
-								<img src='./sf.png'>
+								<img src='http://167.99.183.17:7554/static/imgs/sf.png'>
 							</td> 
 							<td id='sample-date-1' class='calendar-date'></td>
 							<td>Ara Yagami</a></td>
@@ -66,7 +65,7 @@
 						</tr>								
 						<tr class='fleet-row'>
 							<td class='group-cell'>
-								<img src='./sf.png'>
+								<img src='http://167.99.183.17:7554/static/imgs/sf.png'>
 							</td> 
 							<td id='sample-date-2' class='calendar-date'></td>
 							<td>Ara Yagami</a></td>
@@ -77,7 +76,7 @@
 						</tr>
 						<tr class='fleet-row'>
 								<td class='group-cell'>
-									<img src='./sf.png'>
+									<img src='http://167.99.183.17:7554/static/imgs/sf.png'>
 								</td> 
 								<td id='sample-date-3' class='calendar-date'></td>
 								<td>Ara Yagami</a></td>
@@ -88,7 +87,7 @@
 							</tr>								
 							<tr class='fleet-row'>
 								<td class='group-cell'>
-									<img src='./sf.png'>
+									<img src='http://167.99.183.17:7554/static/imgs/sf.png'>
 								</td> 
 								<td id='sample-date-4' class='calendar-date'></td>
 								<td>Ara Yagami</a></td>
@@ -99,6 +98,9 @@
 							</tr>
 					</tbody>
 				</table>
+
+				{% block content %}
+				{% endblock %}	
 			</div>
 		</div>
 	</body>
