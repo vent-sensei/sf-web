@@ -20,7 +20,7 @@
       </div>
       <div class='block-subcontent'>
         {% for group in request.user.groups.all %}
-          <button class='btn btn-default group-button' disabled>{{group}</button>
+          <button class='btn btn-default group-button' disabled>{{group}}</button>
         {% endfor %}
       </div>
     </div>
