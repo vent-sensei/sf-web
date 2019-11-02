@@ -1,0 +1,32 @@
+{% extends 'core/sidebar.html' %}
+{% block content %}
+<div>
+    <div class='block-title'>
+      <h1>Dashboard</h1>
+    </div>
+    <div class='block-content'>
+      <div class='block-subheader'>
+        <h2>Apply for groups</h2>
+      </div>
+      <div class='block-subcontent'>
+        {% for group in appliable_groups %}
+        <button class='btn btn-primary group-button'>
+          <a href='/group_application/applygroup/{{group.group.id}}'>{{group}}</a>
+        </button>
+        {% endfor %}
+        <button class='btn btn-primary'>FC</button>
+      </div>
+      <div class='block-subheader'>
+        <h2>Current groups</h2>
+      </div>
+      <div class='block-subcontent'>
+        {% for group in request.user.groups.all %}
+          <button class='btn btn-default group-button' disabled>{{group}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
