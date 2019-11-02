@@ -8,5 +8,24 @@
   <td>{{event.doctrine}}</a></td>
   <td>{{event.formup}}</td>
   <td>{{event.group}}</td>
+  {% if user == event.user or perms.engagement.manage_events %}
+  <td> 
+    <button class='btn btn-warning'>
+      <a href='{% url 'edit-event' event.pk %}'>
+        <i class='fa fa-fw fa-pencil'></i>
+      </a>
+    </button>
+    <button class='btn btn-warning'>
+      <a href='{% url 'remove-event' event.pk %}'>
+        <i class='fa fa-fw fa-trash'></i>
+      </a>
+    </button>
+    <button class='btn btn-warning'>
+      <a href='{% url 'cancel-event' event.pk %}'>
+        <i class='fa fa-fw fa-stop'></i>
+      </a>
+    </button>
+  </td>  
+  {% endif %}
 </tr>	
   
