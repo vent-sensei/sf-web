@@ -117,6 +117,10 @@ a:hover {
   padding: 0px 12px;
 }
 
+.btn:hover {
+  color: white;
+}
+
 .btn a {
   color: inherit;
 }
