@@ -1,6 +1,8 @@
 {% extends 'core/sidebar.html' %}
 {% block content %}
 
+{% with headerAdded = False}
+
 <div>
   <div class='block-title'>
     <h1>Upcoming fleets</h1>
@@ -14,13 +16,13 @@
       <th>Doctrine</th>
       <th>Form-up</th>
       <th>Group</th>
-      {% if user == event.user or perms.engagement.manage_events %}
-      <th>Actions</th>
+      {% perms.engagement.manage_events %}
+        <th>Actions</th>
       {% endif %}
     </thead>
     <tbody>
       {% for event in events %}
-      {% include 'events/event_row.html' %}
+        {% include 'events/event_row.html' %}
       {% endfor %}
     </tbody>
   </table>
