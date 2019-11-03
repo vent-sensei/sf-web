@@ -10,17 +10,17 @@
   <td>{{event.group}}</td>
   {% if user == event.user or perms.engagement.manage_events %}
   <td> 
-    <button class='btn btn-warning'>
+    <button class='btn btn-default calendar-button'>
       <a href='{% url 'edit-event' event.pk %}'>
         <i class='fa fa-fw fa-pencil'></i>
       </a>
     </button>
-    <button class='btn btn-warning'>
+    <button class='btn btn-default calendar-button'>
       <a href='{% url 'remove-event' event.pk %}'>
         <i class='fa fa-fw fa-trash'></i>
       </a>
     </button>
-    <button class='btn btn-warning'>
+    <button class='btn btn-default calendar-button'>
       <a href='{% url 'cancel-event' event.pk %}'>
         <i class='fa fa-fw fa-stop'></i>
       </a>
