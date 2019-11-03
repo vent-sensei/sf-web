@@ -14,6 +14,9 @@
       <th>Doctrine</th>
       <th>Form-up</th>
       <th>Group</th>
+      {% if user == event.user or perms.engagement.manage_events %}
+      <th>Actions</th>
+      {% endif %}
     </thead>
     <tbody>
       {% for event in events %}
